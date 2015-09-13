@@ -1,0 +1,200 @@
+.welcome-section {
+	position:relative;
+	z-index:200;
+	background:url(../../images/bg.jpg) no-repeat center $blackish;
+	background-size:cover;
+	background-attachment:fixed;
+
+	.content {
+		position:absolute;
+		width:100%;
+		height:100%;
+		text-align:center;
+		padding:0 20px;
+		display:flex;
+		flex-direction:column;
+		justify-content:center;
+		align-items:center;
+		@include Novecentowide(700);
+
+	  	@media (max-width:1200px) { font-size:calc-em(14px, 18px); }
+		@media (max-width:1024px) { font-size:calc-em(12px, 18px); }
+		@media (max-width:770px) { font-size:calc-em(10px, 18px); }
+		@media (max-width:450px) { font-size:calc-em(9px, 18px); }
+
+		h2 {
+			font-size:calc-em(48px, 18px);
+			line-height:1.35;
+			@media (max-width:900px) {
+			  	margin-top:70px;
+			}
+
+			em {
+			 	font-size:calc-em(82px, 48px);
+				display:block;
+			}
+
+			span {
+				color:$primaryColor;
+			}
+
+			@media (max-width:750px) {
+				line-height:1.25;
+			  	span { display:block; line-height:0.8; }
+			}
+		}
+
+		p {
+		  	font-size:calc-em(24px, 18px);
+			font-weight:200;
+			letter-spacing:6px;
+			color:rgba($white, .8);
+			margin:calc-em(50px, 18px) 0 0 0;
+			line-height:1.7;
+		}
+	}
+}
+
+.triangles-parallax {
+	position:absolute;
+	width:100%;
+	height:100%;
+	overflow:hidden;
+
+	span {
+		position:absolute;
+		top:40%;
+		left:50%;
+		display:block;
+	}
+
+	i {
+		display:block;
+		position:absolute;
+
+		@media (max-width:750px) {
+			transform:scale(.7);
+		}
+		@media (max-width:450px) {
+			transform:scale(.5);
+		}
+
+		&:before,
+		&:after {
+			content:'';
+			position:absolute;
+			top:50%;
+			left:50%;
+			margin:-55px 0 0 -45px;
+			width:70px;
+			height:70px;
+			border-radius:50%;
+			opacity:0;
+			pointer-events:none;
+			box-shadow:0 0 0 2px $primaryColor;
+		}
+	}
+
+	.dark i:after,
+	.dark i:before { box-shadow:0 0 0 2px #2a2a2a; }
+
+	i.animated:before {
+	  	animation:ivana1 1s forwards;
+	}
+
+	i.animated:after {
+		animation:ivana2 1s forwards;
+	}
+
+	@import "parallax/*.png";
+	$parallaxTop: (-238px, -212px, -155px, -95px, -18px, 140px, 180px, 240px, 350px);
+	$parallaxLeft: (-277px, 675px, 345px, -725px, -490px, -220px, 470px, -620px, 270px);
+
+	@for $i from 1 through 9 {
+	  	span:nth-of-type(#{$i}) {
+			margin-top:nth($parallaxTop, $i) / 940px * 100vh;
+			margin-left:nth($parallaxLeft, $i) / 1920px * 100vw;
+
+			i {
+				@include parallax-sprite($i);
+				width:parallax-sprite-width($i);
+				height:parallax-sprite-height($i);
+			}
+		}
+	}
+
+	@keyframes ivana1 {
+		0% {
+			opacity:1;
+			transform:scale3d(0.5, 0.5, 1);
+		}
+		100% {
+			opacity:0;
+			transform:scale3d(1.1, 1.1, 1);
+		}
+	}
+	@keyframes ivana2 {
+		0% {
+			opacity:1;
+			transform:scale3d(0.5, 0.5, 1);
+		}
+		50%, 100% {
+			opacity:0;
+			transform:scale3d(1.2, 1.2, 1);
+		}
+	}
+}
+
+
+
+.welcome-square {
+  	width:333px;
+	height:333px;
+	position:absolute;
+	transform:rotate(45deg);
+	border:5px solid #fff;
+	border-right-color:transparent;
+	border-bottom-color:transparent;
+	left:50%;
+	bottom:-166px;
+	margin:0 0 0 -166px;
+	z-index:9;
+	background:url(../../images/bg.jpg) 950px center;
+
+	&:after,
+	&:before {
+		width:97px;
+		height:1px;
+		background:transparent;
+		position:absolute;
+		content:'';
+		display:block;
+		transform:rotate(-45deg);
+		transition:all 1.5s ease;
+	}
+
+	&:after {
+		left:107px;
+		top:-62px;
+		border-left:0px solid $primaryColor;
+	}
+
+	&:before {
+		top:155px;
+		left:-110px;
+		border-right:0px solid $primaryColor;
+	}
+
+	&.draw-lines:after,
+	&.draw-lines:before { width:0; }
+	&.draw-lines:after { border-left:97px solid $primaryColor; }
+	&.draw-lines:before { border-right:97px solid $primaryColor; }
+
+	@media (max-width:1400px) {
+		transform:rotate(45deg) scale(.7);
+	}
+}
+
+@media (max-width:1200px) {
+  	.welcome-square { display:none; }
+}

@@ -1,0 +1,16 @@
+.contact-section {
+	background:$white;
+	position:relative;
+	
+	@media (min-width:1201px) {
+		&:before {
+			width:1px;
+			top:0;
+			left:50%;
+			height:160px;
+			background:$whitish;
+			position:fixed;
+			content:'';
+		}
+	}
+}

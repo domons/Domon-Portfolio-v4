@@ -1,0 +1,14 @@
+Options -Indexes
+IndexIgnore *
+Options +FollowSymlinks
+
+<IfModule mod_deflate.c>
+AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript
+</IfModule>
+
+<ifModule mod_expires.c>
+ExpiresActive On
+ExpiresDefault A2592000
+</ifModule>
+
+ErrorDocument 404 /404.html

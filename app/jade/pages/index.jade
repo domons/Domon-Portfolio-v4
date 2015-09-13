@@ -1,0 +1,22 @@
+extends ../layout
+block body
+	include ../includes/0-header
+
+	.point-fixed
+		span.red-point
+
+	.mousehint-fixed
+		.mousehint-square
+			.mousehint
+				span Przewiń w dół
+				i
+
+	include ../includes/1-welcome
+	include ../includes/2-aboutme
+	include ../includes/3-technologies
+	include ../includes/4-portfolio
+	include ../includes/5-contact
+
+block scripts
+	script(src="js/vendors.js")
+	script(src="js/main.js")

@@ -1,0 +1,57 @@
+// Fira Sans
+@import url(//fonts.googleapis.com/css?family=Fira+Sans:400,300,700&subset=latin,latin-ext);
+
+// Novecento wide
+@font-face {
+	font-family:'Novecento wide';
+	font-style:normal;
+	font-weight:200;
+	src:local('Novecento wide Light'), local('Novecentowide-Light'), url(../../fonts/Novecentowide-Light.otf) format('opentype');
+}
+
+@font-face {
+	font-family:'Novecento wide';
+	font-style:normal;
+	font-weight:300;
+	src:local('Novecento wide Book'), local('Novecentowide-Book'), url(../../fonts/Novecentowide-Book.otf) format('opentype');
+}
+
+@font-face {
+	font-family:'Novecento wide';
+	font-style:normal;
+	font-weight:400;
+	src:local('Novecento wide Normal'), local('Novecentowide-Normal'), url(../../fonts/Novecentowide-Normal.otf) format('opentype');
+}
+
+@font-face {
+	font-family:'Novecento wide';
+	font-style:normal;
+	font-weight:500;
+	src:local('Novecento wide Medium'), local('Novecentowide-Medium'), url(../../fonts/Novecentowide-Medium.otf) format('opentype');
+}
+
+@font-face {
+	font-family:'Novecento wide';
+	font-style:normal;
+	font-weight:600;
+	src:local('Novecento wide DemiBold'), local('Novecentowide-DemiBold'), url(../../fonts/Novecentowide-DemiBold.otf) format('opentype');
+}
+
+@font-face {
+	font-family:'Novecento wide';
+	font-style:normal;
+	font-weight:700;
+	src:local('Novecento wide Bold'), local('Novecentowide-Bold'), url(../../fonts/Novecentowide-Bold.otf) format('opentype');
+}
+
+// Domon logo font
+@font-face {
+	font-family:'DomonLogo';
+	src:url('../../fonts/domon/font.eot');
+	src:url('../../fonts/domon/font.eot?#iefix') format('embedded-opentype'),
+	url('../../fonts/domon/font.woff') format('woff'),
+	url('../../fonts/domon/font.ttf') format('truetype'),
+	url('../../fonts/domon/font.svg#untitled-font-1') format('svg');
+	font-weight:normal;
+	font-style:normal;
+}

@@ -1,0 +1,206 @@
+.main-header {
+	position:fixed;
+  	z-index:500;
+	top:0;
+	left:0;
+	width:100%;
+
+	h1 {
+	 	position:relative;
+		float:left;
+		margin:30px 0 0 50px;
+		width:175px;
+		height:85px;
+		overflow:hidden;
+		@include hide-text;
+
+		&:before, &:after {
+			  position:absolute;
+			  @include DomonLogo('f', 170px);
+			  color:$white;
+			  line-height:0.48;
+		}
+
+		&:before {
+			left:0;
+			z-index:2;
+		 	opacity:0.95;
+		}
+
+		&:after {
+			left:-1px;
+			clip:rect(0,900px,0,0);
+			opacity:.7;
+			animation:noise-anim 3s infinite linear alternate-reverse;
+		}
+
+		@keyframes noise-anim {
+			$steps:20;
+			@for $i from 0 through $steps{
+				#{percentage($i*(1/$steps))}{
+				  	clip:rect(random(100)+px,9999px,random(100)+px,0);
+				}
+			}
+		}
+	}
+
+	nav {
+		float:right;
+		margin:60px 50px 0 0;
+
+		ul {
+
+		}
+
+		li {
+			display:inline-block;
+			margin:0 15px;
+		}
+
+		a {
+			@include Novecentowide(700);
+			font-size:14px;
+			overflow:hidden;
+			height:1em;
+			position:relative;
+			display:inline-block;
+
+			span {
+				position:relative;
+				display:inline-block;
+				transition:transform .3s;
+
+				&:before {
+					position:absolute;
+					top:100%;
+					content:attr(data-hover);
+					color:$primaryColor;
+					transform:translate3d(0,0,0);
+				}
+			}
+
+			&:hover span,
+			&.active span {
+			  	transform:translateY(-100%);
+			}
+		}
+	}
+
+	.black {
+	  	h1:before,
+	  	h1:after,
+		nav a span { color:$black; }
+		.mobile-menu-toggle i:not(.transformed),
+		.mobile-menu-toggle i:after,
+		.mobile-menu-toggle i:before { background-color:$black; }
+	}
+}
+
+.mobile-nav {
+	position:fixed;
+	z-index:600;
+	top:0;
+	bottom:0;
+	right:100px;
+	background:rgba($blackish, .95);
+	left:-100%;
+	visibility:hidden;
+	opacity:0;
+	transition:all .2s ease-in-out;
+	box-shadow:0 0 20px 2px $blackish;
+
+	&.show {
+		visibility:visible;
+		opacity:1;
+		left:0;
+	}
+
+	ul { padding:25px 0; }
+	li { border-bottom:1px solid $blackish; }
+
+	a {
+		display:block;
+	  	@include Novecentowide(700);
+	  	font-size:18px;
+	  	padding:20px;
+	  	text-align:center;
+	  	text-overflow:ellipsis;
+	  	white-space:nowrap;
+	  	overflow:hidden;
+	  	width:100%;
+
+	  	&.active { color:$primaryColor; }
+	}
+}
+
+.mobile-menu-toggle {
+	width:50px;
+	height:50px;
+	cursor:pointer;
+  	margin:20px 25px 0 0;
+	float:right;
+	display:none;
+
+	i {
+		position:relative;
+		display:block;
+		width:32px;
+		height:6px;
+		top:50%;
+		left:50%;
+		margin-top:-3px;
+		margin-left:-16px;
+		background-color:#fff;
+		transition:background-color .2s;
+
+		&:after,
+		&:before {
+			content:'';
+			position:absolute;
+			display:block;
+			width:32px;
+			height:6px;
+			background-color:#fff;
+			left:0px;
+			transition:all .2s;
+		}
+
+		&:after { top:11px; }
+		&:before { top:-11px; }
+
+		&.transformed {
+			background-color:transparent;
+
+			&:after,
+			&:before {
+				top:0px;
+				left:2px;
+				width:26px;
+				transform-origin:50% 50%;
+				transition:all .2s;
+			}
+
+			&:after { transform:rotate(45deg); }
+			&:before { transform:rotate(-45deg); }
+		}
+	}
+
+	&:hover i:after { top:14px; }
+	&:hover i:before { top:-14px; }
+
+	&:hover i.transformed:after,
+	&:hover i.transformed:before {
+		top:0px;
+		left:-1px;
+		width:32px;
+		transition:all .15s;
+	}
+}
+
+@media (max-width:850px) {
+	.main-header nav { display:none; }
+	.mobile-menu-toggle { display:inline-block; }
+	.main-header h1 { margin:15px 0 0 25px; height:70px; }
+	.main-header h1:after,
+	.main-header h1:before { font-size:140px; }
+}

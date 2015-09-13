@@ -1,0 +1,77 @@
+* { box-sizing:border-box; }
+
+html { font-size:62.5%; }
+
+body,
+input,
+textarea,
+button {
+	font-family:'Fira Sans', sans-serif;
+	font-size:18px;
+	-webkit-font-smoothing:antialiased;
+	-moz-osx-font-smoothing:grayscale;
+}
+
+body {
+	background:$blackish;
+	color:$white;
+}
+
+a {
+	text-decoration:none;
+	color:$white;
+}
+
+button { cursor:pointer; }
+
+section {
+	width:100%;
+	min-height:100vh;
+	transition:filter .2s ease-in-out;
+}
+
+.blured {
+  	filter:blur(10px);
+}
+
+.red-point {
+	display:inline-block;
+	background:$primaryColor;
+	color:$white;
+	border-radius:50%;
+	width:36px;
+	height:36px;
+	border:6px solid $whitish;
+	text-align:center;
+	font-weight:bold;
+	font-size:17px;
+	vertical-align:middle;
+	line-height:25px;
+	margin-top:60px;
+}
+
+.point-fixed {
+	position:fixed;
+	z-index:200;
+	margin:235px 0 0 -18px;
+	width:38px;
+	// must be !important because midnight.js
+	left:50% !important;
+	right:auto !important;
+
+	@media (max-width:1200px) {
+	  	display:none;
+	}
+
+	.dark .red-point { border-color:$dark; }
+	.default .red-point:after { content:'1'; }
+	.point-2 .red-point:after { content:'2'; }
+	.point-4 .red-point:after { content:'4'; }
+}
+
+.flex-center {
+	display:flex;
+	flex-direction:row;
+	justify-content:center;
+	align-items:center;
+}

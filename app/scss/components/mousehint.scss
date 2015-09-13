@@ -1,0 +1,134 @@
+.mousehint-square {
+	width:95px;
+	height:95px;
+	background:transparent;
+	border:5px solid $white;
+	transform:rotate(-45deg);
+
+	@media (max-width:1400px) {
+	  	transform:rotate(-45deg) scale(.7);
+	}
+}
+
+.mousehint {
+	border:3px solid $white;
+	width:31px;
+	height:50px;
+	border-radius:20px;
+	transform:rotate(45deg);
+	margin:19px 0 0 27px;
+
+	&:before,
+	&:after {
+		position:absolute;
+		display:block;
+		content:'';
+		background:$white;
+	}
+
+	&:before {
+		width:25px;
+		height:2px;
+		margin-top:19px;
+	}
+
+	&:after {
+		width:2px;
+		height:20px;
+		margin-left:11px;
+	}
+
+	i {
+		display:block;
+		width:2px;
+		height:15px;
+		background:$primaryColor;
+		position:absolute;
+		margin:40px 0 0 12px;
+		animation:mousehint 1.5s linear infinite;
+
+		&:before,
+		&:after {
+			background:$primaryColor;
+			width:9px;
+			height:2px;
+			display:block;
+			position:absolute;
+			content:'';
+			bottom:0;
+		}
+
+		&:before { transform:rotate(-45deg); left:-1px; }
+		&:after { transform:rotate(45deg); left:-6px; }
+	}
+
+	span {
+		font:0/0 a;
+		color:transparent;
+		position:absolute;
+		display:block;
+		width:6px;
+		height:8px;
+		margin:6px 0 0 9px;
+		background:$white;
+		border-radius:3px;
+	}
+
+	&.black span,
+	&.black:before,
+	&.black:after { background:$black; }
+	&.black { border:3px solid $black; }
+}
+
+@keyframes mousehint {
+	0% {
+		margin-top:40px;
+		opacity:1;
+	}
+	100% {
+		margin-top:55px;
+		opacity:0;
+	}
+}
+
+.mousehint-fixed {
+	position:fixed;
+	z-index:300;
+	width:135px;
+	margin-top:235px;
+	margin-left:-67px;
+	// must be !important because midnight.js
+	left:50% !important;
+	right:auto !important;
+
+	@media (max-width:1400px) {
+		margin-top:164px;
+		transform:translate(0, 121px);
+	}
+
+	@media (max-width:1200px) {
+	  	display:none !important;
+	}
+
+	.midnightInner {
+		padding:20px;
+		padding-top:calc(100vh - 450px);
+	}
+
+	.whitish .mousehint-square {
+		border-color:$whitish;
+		background:$white;
+	}
+
+	.dark .mousehint-square {
+		border-color:$dark;
+	  	background:$blackish;
+	}
+
+	.whitish .mousehint {
+		border-color:$black;
+	  	&:before,
+	  	&:after,
+		span { background:$black; }
+	}
+}

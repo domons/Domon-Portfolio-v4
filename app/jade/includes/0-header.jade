@@ -1,0 +1,19 @@
+mixin nav-content()
+	li: a(href="#aboutme"): span(data-hover="O mnie") O mnie
+	li: a(href="#technologies"): span(data-hover="Technologie") Technologie
+	li: a(href="#portfolio"): span(data-hover="Portfolio") Portfolio
+	li: a(href="#contact"): span(data-hover="Kontakt") Kontakt
+
+header.main-header
+	a(href="#welcome")
+		h1 Dominik Barylski
+
+	nav: ul
+		+nav-content()
+
+	span.mobile-menu-toggle: i
+
+.mobile-nav
+	ul
+		li: a(href="#welcome") Start
+		+nav-content()

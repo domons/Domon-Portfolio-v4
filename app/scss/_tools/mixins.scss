@@ -1,0 +1,36 @@
+@mixin hide-text {
+	font:0/0 a;
+	color:transparent;
+}
+
+@mixin text-truncate {
+	overflow:hidden;
+	text-overflow:ellipsis;
+	white-space:nowrap;
+}
+
+@mixin triangle($size, $dir, $color) {
+	width:0;
+	height:0;
+	border:$size solid transparent;
+	border-#{$dir}:$size solid $color;
+}
+
+@mixin Novecentowide($weight: 400) {
+	font-family:'Novecento wide', sans-serif;
+	font-weight:$weight;
+}
+
+@mixin DomonLogo($type, $size) {
+	font-family:'DomonLogo';
+	content:$type;
+	font-size:$size;
+	font-style:normal;
+	font-weight:normal;
+	font-variant:normal;
+	text-transform:none;
+}
+
+@function calc-em($target-px, $context) {
+  	@return ($target-px / $context) * 1em;
+}

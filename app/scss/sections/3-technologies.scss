@@ -1,0 +1,114 @@
+.technologies-section {
+	background:linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url(../../images/bg.jpg) no-repeat center $blackish;
+	background-size:auto, cover;
+	background-attachment:fixed;
+	position:relative;
+	z-index:50;
+
+	&:before,
+	&:after {
+		position:absolute;
+		content:'';
+	 	top:0;
+	}
+
+  	&:before {
+		height:0;
+		border:237px solid transparent;
+		border-top-color:$white;
+		left:50%;
+		top:0;
+		margin-left:-237px;
+		z-index:1;
+
+		@media (max-width:1400px) {
+			transform:scale(.7);
+		  	transform-origin:50% 0;
+		}
+
+		@media (max-width:1200px) {
+		  	display:none;
+		}
+	}
+
+	@media (min-width:1001px) {
+		&:after {
+			height:100%;
+			width:1px;
+			left:50%;
+			background:$dark;
+		}
+	}
+}
+
+.technologies-carousel {
+	width:540px;
+	margin:270px 70px 0 0;
+	float:right;
+}
+
+.technologies-list {
+	overflow:hidden;
+
+	li {
+		width:170px;
+		height:100px;
+		margin:5px;
+		display:flex;
+		flex-direction:row;
+		align-items:center;
+		justify-content:center;
+		float:left;
+
+		&:hover h3:after {
+			opacity:0;
+		}
+
+		&:hover h3:before {
+			opacity:1;
+			transform:scale(1);
+		}
+	}
+
+	h3 {
+		@include hide-text;
+	  	width:70px;
+		height:70px;
+		position:relative;
+
+		&:after,
+		&:before {
+			background-size:contain;
+			background-repeat:no-repeat;
+			background-position:center;
+			position:absolute;
+			content:'';
+			width:100%;
+			height:100%;
+			opacity:1;
+			transition:all .4s ease-in-out;
+		}
+
+		&:before {
+		  	filter:sepia(1) saturate(10) hue-rotate(88deg) invert(1) brightness(1.7);
+		  	transform:scale(1.4);
+		  	opacity:0;
+			z-index:2;
+		}
+	}
+
+	.doctrine, .angular { width:120px; }
+	.analytics { width:125px; }
+  	.symfony, .facebook, .maps { width:110px; }
+	.jade, .jquery, .composer { width:100px; }
+	.mysql, .payu, .smarty { width:90px; }
+
+	$technologies: ('android', 'angular', 'composer', 'css', 'doctrine', 'facebook', 'github', 'analytics', 'maps', 'gulp', 'html', 'jade', 'jquery', 'mysql', 'payu', 'php', 'rwd', 'sass', 'smarty', 'symfony', 'twig');
+
+  	@each $tech in $technologies {
+		.#{$tech}:after,
+		.#{$tech}:before {
+			background-image:url(unquote('../images/technologies/#{$tech}.png'));
+		}
+	}
+}

@@ -1,0 +1,39 @@
+mixin technology(delay, slug, name)
+	li(aos="zoom-in" aos-delay=delay aos-duration="800"): h3(class=slug)= name
+
+section.technologies-section(data-point="dark point-2" data-mousehint="dark")
+	.two-columns
+		.column.to-right
+			.content-section
+				h2.heading(aos="fade-down" aos-duration="1000") Technologie
+				p(aos="fade-up" aos-duration="1000"): strong Zacząłem od zera, a teraz jestem tutaj...
+				p(aos="fade-up" aos-duration="1000") Przez lata poznałem wiele technologii, których używam z łatwością (niektóre z nich wymienione obok). Większość projektów bazuje na moim autorskim systemie zarządzania treścią (CMS). W ostatnim czasie, poszerzam swoją wiedzę na temat Symfony2 oraz Android SDK.
+				p(aos="fade-up" aos-duration="1000"): em Zobacz moje realizacje
+
+		.column
+			.technologies-carousel
+
+				ul.technologies-list
+					+technology(50, 'android', 'Android SDK')
+					//+technology(50, 'angular', 'Angular')
+					+technology(100, 'composer', 'Composser')
+					+technology(150, 'css', 'CSS')
+					+technology(200, 'doctrine', 'Doctrine')
+					+technology(250, 'facebook', 'Facebook API')
+					+technology(300, 'github', 'Github')
+					+technology(350, 'analytics', 'Google Analytics')
+					+technology(400, 'maps', 'Google Maps')
+					+technology(450, 'gulp', 'Gulp')
+					+technology(500, 'html', 'HTML')
+					+technology(550, 'jade', 'Jade')
+					+technology(600, 'jquery', 'jQuery')
+
+				ul.technologies-list
+					+technology(50, 'mysql', 'MySQL')
+					+technology(100, 'payu', 'PayU')
+					+technology(150, 'php', 'PHP')
+					+technology(200, 'rwd', 'Responsive Web Design')
+					+technology(250, 'sass', 'Sass')
+					+technology(300, 'smarty', 'Smarty')
+					+technology(350, 'symfony', 'Symfony 2')
+					+technology(400, 'twig', 'Twig')
