@@ -1,3 +1,9 @@
+/**
+ * Dominik Barylski
+ * Starter Kit
+ * https://github.com/domons/Starter-Kit
+ */
+
 /*--------------------------------------------------------
 | Configuration
 | Tinypng api key:

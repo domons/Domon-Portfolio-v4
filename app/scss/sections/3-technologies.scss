@@ -108,7 +108,7 @@
   	@each $tech in $technologies {
 		.#{$tech}:after,
 		.#{$tech}:before {
-			background-image:url(unquote('../images/technologies/#{$tech}.png'));
+			background-image:url(unquote('../../images/technologies/#{$tech}.png'));
 		}
 	}
 }
