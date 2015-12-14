@@ -6,48 +6,65 @@ var sections = {
 	onScroll: function() {
 		var self = this;
 
-		$('body').on('mousewheel', function(event) {
-			if (self.isScrolled)
+		$(document)
+			.on('mousewheel', function(e) {
+				if (self.isScrolled)
+					return false;
+
+				e.deltaY > 0 ? --self.currentPage : ++self.currentPage;
+
+				self.scrollToSection(self.currentPage);
+
 				return false;
+			})
+			.on('keydown', function(e) {
+				if (self.isScrolled)
+					return false;
 
-			self.isScrolled = true;
+				if (e.keyCode == 38) {
+					--self.currentPage;
+				} else if (e.keyCode == 40) {
+					++self.currentPage;
+				}
 
-			event.deltaY > 0 ? --self.currentPage : ++self.currentPage;
+				self.scrollToSection(self.currentPage);
 
-			if (self.currentPage === -1) {
-				self.currentPage = 0;
-			} else if (self.currentPage > 4) {
-				self.currentPage = 4;
-			}
+				return true;
+			});
+	},
 
-			var pagePos = $('section.'+self.pageName[self.currentPage]+'-section').offset().top;
+	scrollToSection: function(section) {
+		var self = this;
 
-			$('html, body')
-				.stop()
-				.animate({ scrollTop: pagePos }, 600, 'swing', function() {
-					self.isScrolled = false;
-				});
+		if (section === -1) {
+			section = 0;
+		} else if (section > 4) {
+			section = 4;
+		}
 
-			$('.main-header nav li a[href="#'+self.pageName[self.currentPage]+'"]')
-				.addClass('active')
-				.parent().siblings().children('a')
-				.removeClass('active');
+		self.currentPage = section;
+		self.isScrolled = true;
+
+		var pagePos = $('section.'+self.pageName[section]+'-section').offset().top;
+
+		$('html, body')
+			.stop()
+			.animate({ scrollTop: pagePos }, 900, 'easeOutCubic', function() {
+				self.isScrolled = false;
+			});
+
+		$('.main-header nav li a[href="#'+self.pageName[section]+'"]')
+			.addClass('active')
+			.parent().siblings().children('a')
+			.removeClass('active');
 
 //			location.hash = self.pageName[self.currentPage];
-
-			return false;
-		});
 	},
 
 	onInit: function() {
-		var self = this;
-
-		self.currentPage = Math.round($('html').scrollTop() / $(window).height(), 0);
-
-		var pagePos = $('section.'+self.pageName[self.currentPage]+'-section').offset().top;
-		$('html, body').stop().animate({ scrollTop: pagePos }, 600, 'swing');
-
-		$('.main-header nav li a[href="#'+self.pageName[self.currentPage]+'"]').addClass('active');
+		// TODO get location.hash
+		var page = Math.round($('html').scrollTop() / $(window).height(), 0);
+		this.scrollToSection(page);
 	}
 };
 
