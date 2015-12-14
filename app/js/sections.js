@@ -1,6 +1,6 @@
 var sections = {
-	currentPage: 0,
-	pageName: ['welcome', 'aboutme', 'technologies', 'portfolio', 'contact'],
+	current: 0,
+	names: ['welcome', 'aboutme', 'technologies', 'portfolio', 'contact'],
 	isScrolled: false,
 
 	onScroll: function() {
@@ -11,9 +11,9 @@ var sections = {
 				if (self.isScrolled)
 					return false;
 
-				e.deltaY > 0 ? --self.currentPage : ++self.currentPage;
+				e.deltaY > 0 ? --self.current : ++self.current;
 
-				self.scrollToSection(self.currentPage);
+				self.scrollToSection(self.current);
 
 				return false;
 			})
@@ -21,13 +21,13 @@ var sections = {
 				if (self.isScrolled)
 					return false;
 
-				if (e.keyCode == 38) {
-					--self.currentPage;
+				if (e.keyCode == 38) { 
+					--self.current;
 				} else if (e.keyCode == 40) {
-					++self.currentPage;
+					++self.current;
 				}
 
-				self.scrollToSection(self.currentPage);
+				self.scrollToSection(self.current);
 
 				return true;
 			});
@@ -42,29 +42,43 @@ var sections = {
 			section = 4;
 		}
 
-		self.currentPage = section;
+		self.current = section;
 		self.isScrolled = true;
 
-		var pagePos = $('section.'+self.pageName[section]+'-section').offset().top;
+		var pagePos = $('section.'+self.names[section]+'-section').offset().top;
 
 		$('html, body')
 			.stop()
-			.animate({ scrollTop: pagePos }, 900, 'easeOutCubic', function() {
+			.animate({ scrollTop: pagePos }, 1000, 'easeOutCubic', function() {
 				self.isScrolled = false;
 			});
 
-		$('.main-header nav li a[href="#'+self.pageName[section]+'"]')
+		$('.main-header nav li a[href="#'+self.names[section]+'"]')
 			.addClass('active')
 			.parent().siblings().children('a')
 			.removeClass('active');
 
-//			location.hash = self.pageName[self.currentPage];
+		$('.mousehint-fixed .mousehint-square').attr('data-section', ++section);
+
+		location.hash = self.names[self.current];
 	},
 
 	onInit: function() {
-		// TODO get location.hash
-		var page = Math.round($('html').scrollTop() / $(window).height(), 0);
-		this.scrollToSection(page);
+		var self = this;
+
+		if (location.hash !== '') {
+			var section = location.hash.replace('#','');
+			section = self.names.indexOf(section);
+
+			self.scrollToSection(section);
+		}
+
+		$('.main-header a, .mousehint-fixed .mousehint-square').on('click', function(e) {
+			e.preventDefault();
+
+			var section = $(this).data('section');
+			self.scrollToSection(section);
+		});
 	}
 };
 

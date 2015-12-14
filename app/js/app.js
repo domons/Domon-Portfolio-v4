@@ -5,11 +5,7 @@ $(function() {
 	});
 
 	$('html').niceScroll({
-		cursorcolor: '#fa143a',
-		zindex: 900,
-		cursoropacitymin: .5,
-		cursorwidth: '3px',
-		cursorborder: 0
+		zindex: -1
 	});
 
 	$('.main-header').midnight({
