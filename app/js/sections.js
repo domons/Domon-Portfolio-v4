@@ -45,22 +45,35 @@ var sections = {
 		self.current = section;
 		self.isScrolled = true;
 
-		var pagePos = $('section.'+self.names[section]+'-section').offset().top;
+		var sectionName = self.names[section];
+
+		$.event.trigger({
+			type: 'onSectionScrollStart',
+			message: sectionName
+		});
+
+		var pagePos = $('section.'+sectionName+'-section').offset().top;
 
 		$('html, body')
 			.stop()
-			.animate({ scrollTop: pagePos }, 1000, 'easeOutCubic', function() {
+			.animate({ scrollTop: pagePos }, 1000, 'easeOutCubic')
+			.promise().done(function() {
 				self.isScrolled = false;
+
+				$.event.trigger({
+					type: 'onSectionScrollEnd',
+					message: sectionName
+				});
 			});
 
-		$('.main-header nav li a[href="#'+self.names[section]+'"]')
+		$('.main-header nav li a[href="#'+sectionName+'"]')
 			.addClass('active')
 			.parent().siblings().children('a')
 			.removeClass('active');
 
 		$('.mousehint-fixed .mousehint-square').attr('data-section', ++section);
 
-		location.hash = self.names[self.current];
+		location.hash = sectionName;
 	},
 
 	onInit: function() {
@@ -83,6 +96,15 @@ var sections = {
 };
 
 $(function() {
+
+	$(document).on('onSectionScrollStart', function(e) {
+		console.log('onSectionScrollStart: '+ e.message);
+	});
+
+	$(document).on('onSectionScrollEnd', function(e) {
+		console.log('onSectionScrollEnd: '+ e.message);
+	});
+
 	sections.onInit();
 	sections.onScroll();
 });
