@@ -103,7 +103,7 @@ var welcomeSection = {
 		});
 	},
 
-	'init': function()
+	onInit: function()
 	{
 		this.triangles();
 		this.onScroll();
@@ -124,5 +124,5 @@ var welcomeSection = {
 };
 
 $(function() {
-	welcomeSection.init();
+	welcomeSection.onInit();
 });

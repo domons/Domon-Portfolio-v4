@@ -4,6 +4,7 @@
 	background:transparent;
 	border:5px solid $white;
 	transform:rotate(-45deg);
+	cursor:pointer;
 
 	@media (max-width:1400px) {
 	  	transform:rotate(-45deg) scale(.7);

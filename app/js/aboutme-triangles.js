@@ -1,7 +1,8 @@
 $(function() {
 
-	var width =  $('.aboutme-section .photo img').width();
-	var height = $('.aboutme-section .photo img').height();
+	var $img = $('.aboutme-section .photo img');
+	var width =  $img.width();
+	var height = $img.height();
 
 	$('#canvas-photo').attr({
 		'width': width,

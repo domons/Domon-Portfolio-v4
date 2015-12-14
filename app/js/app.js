@@ -1,8 +1,7 @@
 $(function() {
 	$('.mobile-menu-toggle').on('click', function() {
 		$('.mobile-menu-toggle i').toggleClass('transformed');
-		$('.mobile-nav').toggleClass('show');
-		$('section').toggleClass('blured');
+//		$('.mobile-nav').toggleClass('show'); TODO mobilenav header class
 	});
 
 	$('html').niceScroll({

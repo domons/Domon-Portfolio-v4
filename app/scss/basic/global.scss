@@ -30,10 +30,6 @@ section {
 	transition:filter .2s ease-in-out;
 }
 
-.blured {
-  	filter:blur(10px);
-}
-
 .red-point {
 	display:inline-block;
 	background:$primaryColor;
