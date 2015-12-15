@@ -21,13 +21,11 @@ var sections = {
 				if (self.isScrolled)
 					return false;
 
-				if (e.keyCode == 38) { 
-					--self.current;
+				if (e.keyCode == 38) {
+					self.scrollToSection(--self.current);
 				} else if (e.keyCode == 40) {
-					++self.current;
+					self.scrollToSection(++self.current);
 				}
-
-				self.scrollToSection(self.current);
 
 				return true;
 			});

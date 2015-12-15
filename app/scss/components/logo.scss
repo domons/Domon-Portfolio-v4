@@ -1,0 +1,34 @@
+.logo {
+	position:relative;
+	overflow:hidden;
+	@include hide-text;
+
+	&:before, &:after {
+		position:absolute;
+		@include DomonLogo('f', 170px);
+		color:$white;
+		line-height:0.48;
+	}
+
+	&:before {
+		left:0;
+		z-index:2;
+		opacity:0.95;
+	}
+
+	&:after {
+		left:-1px;
+		clip:rect(0,900px,0,0);
+		opacity:.7;
+		animation:noise-anim 3s infinite linear alternate-reverse;
+	}
+
+	@keyframes noise-anim {
+		$steps:20;
+		@for $i from 0 through $steps{
+			#{percentage($i*(1/$steps))}{
+			  	clip:rect(random(100)+px,9999px,random(100)+px,0);
+			}
+		}
+	}
+}

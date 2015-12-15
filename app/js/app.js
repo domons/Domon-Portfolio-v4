@@ -5,7 +5,8 @@ $(function() {
 	});
 
 	$('html').niceScroll({
-		zindex: -1
+		zindex: -1,
+		enablekeyboard: false
 	});
 
 	$('.main-header').midnight({
@@ -103,3 +104,9 @@ function mouseHint() {
 		}
 	});
 }
+
+// TODO
+$(window).load(function() {
+
+	$('.loader').fadeOut();
+});
