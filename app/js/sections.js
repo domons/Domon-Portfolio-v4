@@ -28,6 +28,10 @@ var sections = {
 				}
 
 				return true;
+			})
+			.on('mousedown', function(e) {
+				if (e.which == 2)
+					e.preventDefault();
 			});
 	},
 
@@ -92,17 +96,3 @@ var sections = {
 		});
 	}
 };
-
-$(function() {
-
-	$(document).on('onSectionScrollStart', function(e) {
-		console.log('onSectionScrollStart: '+ e.message);
-	});
-
-	$(document).on('onSectionScrollEnd', function(e) {
-		console.log('onSectionScrollEnd: '+ e.message);
-	});
-
-	sections.onInit();
-	sections.onScroll();
-});

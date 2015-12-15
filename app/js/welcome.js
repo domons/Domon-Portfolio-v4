@@ -122,7 +122,3 @@ var welcomeSection = {
 		}, 800);
 	}
 };
-
-$(function() {
-	welcomeSection.onInit();
-});

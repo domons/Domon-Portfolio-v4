@@ -1,56 +1,3 @@
-$(function() {
-	$('.mobile-menu-toggle').on('click', function() {
-		$('.mobile-menu-toggle i').toggleClass('transformed');
-//		$('.mobile-nav').toggleClass('show'); TODO mobilenav header class
-	});
-
-	$('html').niceScroll({
-		zindex: -1,
-		enablekeyboard: false
-	});
-
-	$('.main-header').midnight({
-		dataAttr: 'header'
-	});
-
-	$('.point-fixed').midnight({
-		dataAttr: 'point',
-		headerClass: 'midnightPoint',
-		innerClass: 'pointInner'
-	});
-
-	$('.mousehint-fixed').midnight({
-		dataAttr: 'mousehint'
-	});
-
-	$('.technologies-carousel').owlCarousel({
-		loop: true,
-		margin: 0,
-		nav: false,
-		dots: true,
-		items: 1,
-		autoplay: true,
-		autoplayTimeout: 15000,
-		autoplayHoverPause: true,
-		autoplaySpeed: 600,
-		dotsSpeed: 600,
-		dragEndSpeed: 600
-	});
-
-	$('.technologies-carousel .owl-controls').attr({
-		'aos': 'fade-up',
-		'aos-delay': '500',
-		'aos-duration': '800'
-	});
-
-	mouseHint();
-
-	AOS.init({
-//		once: true
-	});
-
-});
-
 function mouseHint() {
 	var mouseHintUpdated = false;
 	$('.mousehint-fixed').css('opacity',0).delay(800).animate({opacity:1},1000);
@@ -105,8 +52,80 @@ function mouseHint() {
 	});
 }
 
+$(function() {
+	$('.mobile-menu-toggle').on('click', function() {
+		$('.mobile-menu-toggle i').toggleClass('transformed');
+//		$('.mobile-nav').toggleClass('show'); TODO mobilenav header class
+	});
+
+	$('html').niceScroll({
+		zindex: -1,
+		enablekeyboard: false,
+		spacebarenabled: false
+	});
+
+	$('.main-header').midnight({
+		dataAttr: 'header'
+	});
+
+	$('.point-fixed').midnight({
+		dataAttr: 'point',
+		headerClass: 'midnightPoint',
+		innerClass: 'pointInner'
+	});
+
+	$('.mousehint-fixed').midnight({
+		dataAttr: 'mousehint'
+	});
+
+	$('.technologies-carousel').owlCarousel({
+		loop: true,
+		margin: 0,
+		nav: false,
+		dots: true,
+		items: 1,
+		autoplay: true,
+		autoplayTimeout: 15000,
+		autoplayHoverPause: true,
+		autoplaySpeed: 600,
+		dotsSpeed: 600,
+		dragEndSpeed: 600
+	});
+
+	$('.technologies-carousel .owl-controls').attr({
+		'aos': 'fade-up',
+		'aos-delay': '500',
+		'aos-duration': '800'
+	});
+
+	mouseHint();
+
+	AOS.init({
+//		once: true
+	});
+
+});
+
+$(function() {
+	welcomeSection.onInit();
+});
+
+$(function() {
+
+	// TODO change section listener
+	$(document).on('onSectionScrollStart', function(e) {
+		console.log('onSectionScrollStart: '+ e.message);
+	});
+
+	$(document).on('onSectionScrollEnd', function(e) {
+		console.log('onSectionScrollEnd: '+ e.message);
+	});
+
+	sections.onInit();
+	sections.onScroll();
+});
+
 // TODO
 $(window).load(function() {
-
 	$('.loader').fadeOut();
 });
