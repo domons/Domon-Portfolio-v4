@@ -60,9 +60,13 @@ compileScssFiles = [
 --------------------------------------------------------*/
 concatJsFiles = {
 	main: [
-		path.app.js + '/aboutme-triangles.js',
-		path.app.js + '/welcome.js',
 		path.app.js + '/sections.js',
+		path.app.js + '/welcome.js',
+		path.app.js + '/aboutme-triangles.js',
+		path.app.js + '/aboutme.js',
+		path.app.js + '/technologies.js',
+		path.app.js + '/portfolio.js',
+		path.app.js + '/contact.js',
 		path.app.js + '/app.js'
 	],
 	vendors: [
