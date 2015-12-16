@@ -161,8 +161,9 @@
 		left:-70px;
 		width:50px;
 		text-align:right;
+		cursor:pointer;
 
-		span { font-weight:bold; color:#fff; }
+		b { font-weight:bold; color:#fff; }
 
 		&:after {
 			position:absolute;
@@ -192,7 +193,7 @@
 		height:100%;
 		overflow:hidden;
 		margin-left:1px;
-//		width:0;
+		width:0;
 	}
 
 	li {

@@ -12,7 +12,7 @@ var portfolioSection = {
 			success: function(works) {
 				self.works = works;
 
-				$('.portfolio-thumbnails').append('<a href="javascript:void(0)" class="thumbs-toggle"><span>1</span> / '+ works.length +'</a><ul></ul>');
+				$('.portfolio-thumbnails').append('<span class="thumbs-toggle"><b>1</b> / '+ works.length +'</span><ul></ul>');
 
 				for (var i = 0; i < works.length; i++) {
 					self.appendWork(works[i]);
@@ -25,7 +25,7 @@ var portfolioSection = {
 	},
 
 	appendWork: function(work) {
-		var html = '<div class="work-slide">' +
+		var html = '<div class="work-slide" data-id="' + work.id + '" data-slug="' + work.slug + '">' +
 						'<div class="work-bg" style="background-image:url(' + this.apiUrl + 'Upload/works/' + work.background + ')"></div>' +
 						'<div class="work-img" style="background-image:url(' + this.apiUrl + 'Upload/works/' + work.image + '); background-position:' + work.image_position + '"></div>' +
 						(work.color ? '<div class="work-gradient" style="background:linear-gradient(to bottom, transparent 0%, ' + work.color + ' 100%)"></div>' : '') +
@@ -37,13 +37,21 @@ var portfolioSection = {
 					'</div>';
 
 		$('.portfolio-works').append(html);
-		$('.portfolio-thumbnails ul').append('<li><a href="#portfolio/' + work.slug + '"><img src="' + this.apiUrl + 'Upload/works/' + work.thumb + '" alt="' + work.title + '" /></a></li>');
+		$('.portfolio-thumbnails ul').append('<li><a href="#portfolio/' + work.slug + '" data-id="' + work.id + '"><img src="' + this.apiUrl + 'Upload/works/' + work.thumb + '" alt="' + work.title + '" /></a></li>');
+	},
+
+	changeWork: function(id) {
+		console.log('change work ' + id);
 	},
 
 	onInit: function() {
 		this.loadWorks();
 
-		$('.portfolio-thumbnails ul').niceScroll({
+		var $worksImg = $('.portfolio-section .work-img'),
+			$thumbsList = $('.portfolio-thumbnails ul'),
+			self = this;
+
+		$thumbsList.niceScroll({
 			touchbehavior: true,
 			bouncescroll: true,
 			cursoropacitymin: 0,
@@ -51,6 +59,35 @@ var portfolioSection = {
 			cursorwidth: 0,
 			cursorborder: 0,
 			railalign: 'left'
+		});
+
+		$('.portfolio-section').on('mousemove', function(e) {
+			var offsetX = 0.5 - e.pageX / $(window).width(),
+				translate = 'translate3d(' + Math.round(offsetX * 25) + 'px,0,0)'
+
+			$worksImg.css({
+				'-webkit-transform': translate,
+				'transform': translate
+			});
+		});
+
+		$('.portfolio-thumbnails .thumbs-toggle').on('click', function() {
+			var val = $thumbsList.width() > 0 ? 0 : 180;
+
+			$thumbsList.animate({ width: val }, 200, 'easeInOutCubic');
+			$worksImg.animate({ marginLeft: val }, 200, 'easeInOutCubic');
+		});
+
+		$('.portfolio-section .portfolio-works').on('click', function() {
+			$thumbsList.animate({ width: 0 }, 200, 'easeInOutCubic');
+			$worksImg.animate({ marginLeft: 0 }, 200, 'easeInOutCubic');
+		});
+
+		$thumbsList.on('click', 'a', function(e) {
+			e.preventDefault();
+
+			var id = $(this).data('id');
+			self.changeWork(id);
 		});
 	}
 };
