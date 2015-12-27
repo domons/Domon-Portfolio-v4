@@ -1,6 +1,7 @@
 var portfolioSection = {
 	apiUrl: 'http://domons.net/backend/',
 	works: null,
+	currentWork: null,
 
 	loadWorks: function() {
 		var self = this;
@@ -17,6 +18,8 @@ var portfolioSection = {
 				for (var i = 0; i < works.length; i++) {
 					self.appendWork(works[i]);
 				}
+
+				self.changeWork(1);
 			},
 			error: function(error) {
 				console.log(error.statusText + ' ' + error.status);
@@ -25,7 +28,7 @@ var portfolioSection = {
 	},
 
 	appendWork: function(work) {
-		var html = '<div class="work-slide" data-id="' + work.id + '" data-slug="' + work.slug + '">' +
+		var html = '<div class="work-slide" data-slug="' + work.slug + '">' +
 						'<div class="work-bg" style="background-image:url(' + this.apiUrl + 'Upload/works/' + work.background + ')"></div>' +
 						'<div class="work-img" style="background-image:url(' + this.apiUrl + 'Upload/works/' + work.image + '); background-position:' + work.image_position + '"></div>' +
 						(work.color ? '<div class="work-gradient" style="background:linear-gradient(to bottom, transparent 0%, ' + work.color + ' 100%)"></div>' : '') +
@@ -37,11 +40,42 @@ var portfolioSection = {
 					'</div>';
 
 		$('.portfolio-works').append(html);
-		$('.portfolio-thumbnails ul').append('<li><a href="#portfolio/' + work.slug + '" data-id="' + work.id + '"><img src="' + this.apiUrl + 'Upload/works/' + work.thumb + '" alt="' + work.title + '" /></a></li>');
+		$('.portfolio-thumbnails ul').append('<li><a href="#portfolio/' + work.slug + '"><img src="' + this.apiUrl + 'Upload/works/' + work.thumb + '" alt="' + work.title + '" /></a></li>');
 	},
 
-	changeWork: function(id) {
-		console.log('change work ' + id);
+	changeWork: function(index) {
+		self.currentWork = index;
+
+		$('.portfolio-section .work-slide:nth-of-type('+index+')')
+			.fadeIn()
+			.siblings()
+			.fadeOut();
+
+		$('.portfolio-thumbnails li:nth-of-type('+index+') a')
+			.addClass('active')
+			.parent()
+			.siblings()
+			.children('a')
+			.removeClass('active');
+
+		var $logo = $('.portfolio-section .work-slide:nth-of-type('+index+') h2 img');
+
+		$logo.each(function() {
+			if (this.complete) {
+				if ( ! $logo.attr('style'))
+					$logo.height($logo.height()/2);
+			}
+		});
+
+		$('.portfolio-thumbnails .thumbs-toggle b').text(index);
+
+		var margin = index > 3 ? (120*(index-3)) : 0;
+		var endBottom = $('.portfolio-thumbnails ul').height() - $(window).height();
+
+		if (margin*-1 > endBottom)
+			margin = endBottom;
+
+		$('.portfolio-thumbnails ul').animate({ scrollTop: margin }, 300);
 	},
 
 	onInit: function() {
@@ -86,8 +120,8 @@ var portfolioSection = {
 		$thumbsList.on('click', 'a', function(e) {
 			e.preventDefault();
 
-			var id = $(this).data('id');
-			self.changeWork(id);
+			var index = $(this).parent().index() + 1;
+			self.changeWork(index);
 		});
 	}
 };
