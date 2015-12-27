@@ -19,6 +19,8 @@
 		&:before, &:after {
 		  	font-size:250px;
 		}
+
+		&:after { opacity:.4; }
 	}
 
 	.dots {

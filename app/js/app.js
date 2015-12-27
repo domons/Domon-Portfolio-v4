@@ -136,6 +136,6 @@ $(function() {
 });
 
 // TODO
-$(window).load(function() {
-	$('.loader').fadeOut();
-});
+//$(window).load(function() {
+//	$('.loader').fadeOut();
+//});

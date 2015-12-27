@@ -136,8 +136,8 @@
 
 .portfolio-thumbnails {
 	position:absolute;
-	z-index:20;
-	top:0;
+	z-index:600;
+	top:300vh; // TODO ?
 	left:415px;
 	height:100%;
 
