@@ -1,7 +1,7 @@
 var portfolioSection = {
 	apiUrl: 'http://domons.net/backend/',
 	works: null,
-	currentWork: null,
+	currentWork: 1,
 
 	loadWorks: function() {
 		var self = this;
@@ -44,19 +44,22 @@ var portfolioSection = {
 	},
 
 	changeWork: function(index) {
-		self.currentWork = index;
+		var self = this;
+
+		// change work animate
+
+
+		$('.portfolio-section .work-slide:nth-of-type('+self.currentWork+')')
+			.css('z-index',2);
 
 		$('.portfolio-section .work-slide:nth-of-type('+index+')')
-			.fadeIn()
-			.siblings()
-			.fadeOut();
+			.show()
+			.css('z-index',1);
 
-		$('.portfolio-thumbnails li:nth-of-type('+index+') a')
-			.addClass('active')
-			.parent()
-			.siblings()
-			.children('a')
-			.removeClass('active');
+
+		// end animate
+
+		self.currentWork = index;
 
 		var $logo = $('.portfolio-section .work-slide:nth-of-type('+index+') h2 img');
 
@@ -66,6 +69,15 @@ var portfolioSection = {
 					$logo.height($logo.height()/2);
 			}
 		});
+
+
+		$('.portfolio-thumbnails li:nth-of-type('+index+') a')
+			.addClass('active')
+			.parent()
+			.siblings()
+			.children('a')
+			.removeClass('active');
+
 
 		$('.portfolio-thumbnails .thumbs-toggle b').text(index);
 
@@ -78,8 +90,12 @@ var portfolioSection = {
 		$('.portfolio-thumbnails ul').animate({ scrollTop: margin }, 300);
 	},
 
+	afterWorkLoad: function(index) {
+	},
+
 	onInit: function() {
 		this.loadWorks();
+
 
 		var $worksImg = $('.portfolio-section .work-img'),
 			$thumbsList = $('.portfolio-thumbnails ul'),

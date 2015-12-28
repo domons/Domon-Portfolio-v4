@@ -58,6 +58,16 @@ var app = {
 		});
 	},
 
+	portfolioThumbsRecalc: function() {
+		var margin = $('.welcome-section').height();
+		margin += $('.aboutme-section').height();
+		margin += $('.technologies-section').height();
+
+		$('.portfolio-thumbnails').css({
+			'top': margin
+		});
+	},
+
 	onInit: function() {
 		this.mouseHint();
 
@@ -85,11 +95,13 @@ var app = {
 //			once: true
 		});
 
-
 		$('.mobile-menu-toggle').on('click', function() {
 			$('.mobile-menu-toggle i').toggleClass('transformed');
 //			$('.mobile-nav').toggleClass('show'); TODO mobilenav header class
 		});
+
+		this.portfolioThumbsRecalc();
+		$(window).resize(this.portfolioThumbsRecalc);
 	}
 };
 
